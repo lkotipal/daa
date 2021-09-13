@@ -7,7 +7,7 @@
 #include "problem_9.h"
 #include "rng.h"
 
-int main() {
+int testMaximumDifference() {
 	std::uniform_int_distribution<> distrib(-1E9, 1E9);
 
 	for (int i = 0; i < 100; ++i) {
@@ -16,7 +16,7 @@ int main() {
 			i = distrib(RNG);
 		}
 
-		std::array<int, 2> ij = maximumDifference(v);	
+		std::array<long, 2> ij = maximumDifference(v);	
 
 		int diff = checkMaximumDifference(v);
 
@@ -26,7 +26,11 @@ int main() {
 		}
 	}
 
-	std::cout << "Maximum differences calculated!" << std::endl;
+	return 0;
+}
+
+int testFindMedian() {
+	std::uniform_int_distribution<> distrib(-1E9, 1E9);
 
 	for (int i = 0; i < 100; ++i) {
 		std::vector<int> v(1E6);
@@ -47,7 +51,11 @@ int main() {
 
 	}
 
-	std::cout << "Medians calculated!" << std::endl;
+	return 0;
+}
+
+int testQuicksortMedian() {
+	std::uniform_int_distribution<> distrib(-1E9, 1E9);
 
 	for (int i = 0; i < 100; ++i) {
 		std::vector<int> v(1E6);
@@ -65,9 +73,13 @@ int main() {
 		}
 	}
 
-	std::cout << "Arrays sorted!" << std::endl;
+	return 0;
+}
 
+int testQuicksortRandom() {
 	for (int i = 0; i < 100; ++i) {
+		std::uniform_int_distribution<> distrib(-1E9, 1E9);
+
 		std::vector<int> v(1E6);
 		for (int &i : v) {
 			i = distrib(RNG);
@@ -83,7 +95,30 @@ int main() {
 		}
 	}
 
-	std::cout << "Arrays sorted!" << std::endl;
+	return 0;
+}
+
+int main() {
+
+	if (int error = testMaximumDifference())
+		return error;
+	else 
+		std::cout << "Maximum differences calculated!" << std::endl;
+
+	if (int error = testFindMedian())
+		return error;
+	else
+		std::cout << "Medians calculated!" << std::endl;
+
+	if (int error = testQuicksortMedian())
+		return 1;
+	else
+		std::cout << "Arrays sorted!" << std::endl;
+
+	if (int error = testQuicksortRandom())
+		return 1;
+	else
+		std::cout << "Arrays sorted!" << std::endl;
 
 	return 0;
 }
