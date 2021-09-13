@@ -16,7 +16,7 @@ int testMaximumDifference() {
 			i = distrib(RNG);
 		}
 
-		std::array<long, 2> ij = maximumDifference(v);	
+		auto ij = maximumDifference(v);	
 
 		int diff = checkMaximumDifference(v);
 

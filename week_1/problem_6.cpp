@@ -20,7 +20,7 @@ std::array<std::vector<int>::const_iterator, 2> maximumDifference(std::vector<in
 	return ij;
 }
 
-std::array<long, 2> maximumDifference(std::vector<int>& v) 
+std::array<long long, 2> maximumDifference(std::vector<int>& v) 
 {
 	auto ij = maximumDifference(v.begin(), v.end());
 	return {ij[0] - v.begin(), ij[1] - v.begin()};
