@@ -3,51 +3,55 @@
 #include <iostream>
 #include "problem_7.h"
 
-int findMedian(std::vector<int>& v, int min, int max) {
-	return select(v, min + ceil((double) (max - min)/2) - 1, min, max);
+int findMedian(std::vector<int>::iterator min, std::vector<int>::iterator max) 
+{
+	return select(min, max, ceil((double) (max - min)/2) - 1);
 }
 
-int findMedian(std::vector<int>& v) {
-	return findMedian(v, 0, v.size());
+int findMedian(std::vector<int>& v) 
+{
+	return findMedian(v.begin(), v.end());
 }
 
-int partition(std::vector<int>& v, int p, int min, int max) {
+std::vector<int>::iterator partition(std::vector<int>::iterator min, std::vector<int>::iterator max, int p) 
+{ 
 	// Lomuto
-	int i = min-1;
-	for (int j = min; j < max - 1; ++j) {
+	auto i = min;
+	for (auto j = min; j < max - 1; ++j) {
 		// Swap performed here since we need to make sure one of the pivot values is stored in v[max - 1]
-		if (v[j] == p)
-			std::swap(v[j], v[max - 1]);
-		if (v[j] <= p) {
+		if (*j == p)
+			std::iter_swap(j, max-1);
+		if (*j <= p) {
+			std::iter_swap(i, j);
 			++i;
-			std::swap(v[i], v[j]);
 		}
 	}
-	std::swap(v[i+1], v[max-1]);
-	return i + 1;
+	std::iter_swap(i, max-1);
+	return i;
 }
 
-int select(std::vector<int>& v, int j, int min, int max) {
+int select(std::vector<int>::iterator min, std::vector<int>::iterator max, int j)
+{
 	int n = max - min;
 	if (n <= 5) {
-		std::sort(v.begin() + min, v.begin() + max);
-		return v[j];
+		std::sort(min, max);
+		return *(min + j);
 	}
 	else {
 		std::vector<int> m(ceil((double) n/5));
 		for (int i = 0; i < floor((double) n/5); ++i)
-			m[i] = findMedian(v, min + i*5, min + (i+1)*5);
+			m[i] = findMedian(min + i*5, min + (i+1)*5);
 		if (n % 5)
-			m[floor((double) n/5)] = findMedian(v, min + 5*floor((double) n/5), max);
+			m[floor((double) n/5)] = findMedian(min + 5*floor((double) n/5), max);
 		int p = findMedian(m);
 
-		int x = partition(v, p, min, max);
-		if (j == x) {
+		auto x = partition(min, max, p);
+		if (j == x - min) {
 			return p;
-		} else if (x > j) {
-			return select(v, j, min, x);
+		} else if (x - min > j) {
+			return select(min, x, j);
 		} else {
-			return select(v, j, x, max);
+			return select(x, max, j - (x - min));
 		}
 	}
 }
