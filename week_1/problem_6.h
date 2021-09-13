@@ -2,6 +2,6 @@
 #include <array>
 #include <vector>
 
-std::array<int, 2> maximumDifference(std::vector<int>& v, int min, int max);
-std::array<int, 2> maximumDifference(std::vector<int>& v);
+std::array<std::vector<int>::const_iterator, 2> maximumDifference(std::vector<int>::const_iterator min, std::vector<int>::const_iterator max);
+std::array<long, 2> maximumDifference(std::vector<int>& v);
 int checkMaximumDifference(std::vector<int>& v);
