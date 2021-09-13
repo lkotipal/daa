@@ -5,12 +5,15 @@
 #include "problem_7.h"
 #include "problem_8.h"
 #include "problem_9.h"
+#include "rng.h"
 
 int main() {
-	for (int i = 0; i < 10; ++i) {
+	std::uniform_int_distribution<> distrib(-1E9, 1E9);
+
+	for (int i = 0; i < 100; ++i) {
 		std::vector<int> v(1E6);
 		for (int &i : v) {
-			i = rand();
+			i = distrib(RNG);
 		}
 
 		std::array<int, 2> ij = maximumDifference(v);	
@@ -25,10 +28,10 @@ int main() {
 
 	std::cout << "Maximum differences calculated!" << std::endl;
 
-	for (int i = 0; i < 10; ++i) {
+	for (int i = 0; i < 100; ++i) {
 		std::vector<int> v(1E6);
 		for (int &i : v) {
-			i = rand();
+			i = distrib(RNG);
 		}
 
 		int median = findMedian(v);	
@@ -46,10 +49,10 @@ int main() {
 
 	std::cout << "Medians calculated!" << std::endl;
 
-	for (int i = 0; i < 10; ++i) {
+	for (int i = 0; i < 100; ++i) {
 		std::vector<int> v(1E6);
 		for (int &i : v) {
-			i = rand();
+			i = distrib(RNG);
 		}
 
 		quickSortMedian(v);	
@@ -64,10 +67,10 @@ int main() {
 
 	std::cout << "Arrays sorted!" << std::endl;
 
-	for (int i = 0; i < 10; ++i) {
+	for (int i = 0; i < 100; ++i) {
 		std::vector<int> v(1E6);
 		for (int &i : v) {
-			i = rand();
+			i = distrib(RNG);
 		}
 
 		quickSortRandom(v);	
