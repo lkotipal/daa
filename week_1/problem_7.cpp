@@ -12,10 +12,12 @@ int findMedian(std::vector<int>& v) {
 }
 
 int partition(std::vector<int>& v, int p, int min, int max) {
-	// Finding the pivot here is O(n), same as the loop.
-	std::swap(*std::find(v.begin() + min, v.begin() + max, p), v[max - 1]);
+	// Lomuto
 	int i = min-1;
 	for (int j = min; j < max - 1; ++j) {
+		// Swap performed here since we need to make sure one of the pivot values is stored in v[max - 1]
+		if (v[j] == p)
+			std::swap(v[j], v[max - 1]);
 		if (v[j] <= p) {
 			++i;
 			std::swap(v[i], v[j]);
