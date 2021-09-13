@@ -24,12 +24,12 @@ std::array<int, 2> maximumDifference(std::vector<int>& v) {
 
 int checkMaximumDifference(std::vector<int>& v) {
 	int d = INT_MIN;
-	int min = INT_MAX;
-	for (int i : v) {
-		if (i - min > d)
-			d = i - min;
-		if (i < min)
-			min = i;
+	int min = v[0];
+	for (int i = 1; i < v.size(); ++i) {
+		if (v[i] - min > d)
+			d = v[i] - min;
+		if (v[i] < min)
+			min = v[i];
 	}
 	return d;
 }
