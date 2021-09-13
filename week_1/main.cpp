@@ -36,7 +36,7 @@ int main() {
 		std::sort(v.begin(), v.end());
 
 		if (median != v[ceil((double) v.size()/2) - 1]) {
-			std::cout << "Error, expected median " << v[ceil((double) v.size()/2) - 1] << " but got " << median << std::endl;
+			std::cerr << "Error, expected median " << v[ceil((double) v.size()/2) - 1] << " but got " << median << std::endl;
 			for (int i : v)
 				std::cout << i << std::endl;
 			return 1;
@@ -56,7 +56,7 @@ int main() {
 
 		for (int i = 1; i < v.size(); ++i) {
 			if (v[i] < v[i-1]) {
-				std::cout << "KYRPÄ!" << std::endl;
+				std::cerr << "Error, sorting failed" << std::endl;
 				return 1;
 			}
 		}
@@ -74,7 +74,7 @@ int main() {
 
 		for (int i = 1; i < v.size(); ++i) {
 			if (v[i] < v[i-1]) {
-				std::cout << "KYRPÄ!" << std::endl;
+				std::cerr << "Error, sorting failed" << std::endl;
 				return 1;
 			}
 		}
